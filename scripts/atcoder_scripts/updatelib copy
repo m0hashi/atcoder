@@ -1,0 +1,92 @@
+#!/usr/local/bin/python
+from distutils import file_util
+import CppHeaderParser
+import glob
+import argparse
+import json
+
+PREFIX='lib/'
+CPP_SNIPPETS_PATH='/workspaces/atc-env/.vscode/cpplib.code-snippets'
+CPPLIB_PATH='/workspaces/atc-env/snippets/cpp/_src'
+PYLIB_PATH='/workspaces/atc-env/snippets/cpp'
+
+
+def get_body(filepath, line_number):
+    return_body = []
+    with open(filepath) as f:
+        src_lines = list(map(lambda s:s.rstrip(), f.readlines()))
+    bra_counts=0
+    ket_counts=0
+    for line in src_lines[line_number-1:]:
+        bra_counts += sum([1 if w=='{' else 0 for w in line])
+        ket_counts += sum([1 if w=='}' else 0 for w in line])
+        return_body.append(line)
+        if bra_counts==ket_counts:
+            break
+    return return_body
+
+def read_cpplib(filepath):
+    header = CppHeaderParser.CppHeader(filepath)
+    ret = []
+    # get classes
+    for name, cls in header.classes.items():
+        if cls['parent'] is not None:
+            continue
+        body = []
+        if 'template' in cls.keys():
+            body.append(cls['template'])
+        body += get_body(filepath, cls['line_number'])
+        # body = "\n".join(body)
+        ret.append({
+            'type':"class",
+            'name': name,
+            'filename':filepath,
+            'body': body
+        })
+    for func in header.functions:
+        if func['name']=='main': continue
+        body = []
+        if 'template' in func.keys():
+            if func['template'] :
+                body.append(func['template'])
+        body += get_body(filepath, func['line_number'])
+        ret.append({
+            'type':"function",
+            'name': func['name'],
+            'filename':filepath,
+            'body': body
+        })
+    for x in ret:
+        print(f"\t {x['type']}:{x['name']}")
+    return ret
+        
+def write_cpplib(snippets):
+    snippets_json = {}
+    for snippet in snippets:
+        data = {
+            "scope":"cpp",
+            "prefix":PREFIX+snippet['name'],
+            "body": snippet['body'],
+            "description": f"{snippet['filename']}/{snippet['name']}"
+        }
+        snippets_json[snippet['name']]=data
+    with open(CPP_SNIPPETS_PATH, 'w') as f:
+        json.dump(snippets_json,f, indent=4)
+        
+def main(lang: str):
+    if lang=='cpp':
+        filepath_list = glob.glob(CPPLIB_PATH+"/**/*.cpp", recursive=True)
+        config_list = glob.glob(CPPLIB_PATH+"/**/*.yaml", recursive=True)
+        snippets = []
+        for filepath in filepath_list:
+            print(filepath)
+            snippets += read_cpplib(filepath)
+        write_cpplib(snippets)
+    elif lang=='py':
+        pass
+
+if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('lang',default='cpp')
+    args = parser.parse_args()
+    main(args.lang)

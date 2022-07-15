@@ -1,0 +1,4 @@
+[templates]
+"main.cpp" = "/workspaces/atc-env/templates/actoder_templates/main.cpp"
+"main.py" = "/workspaces/atc-env/templates/actoder_templates/main.py"
+"generate.py" = "/workspaces/atc-env/templates/actoder_templates/generate.py"

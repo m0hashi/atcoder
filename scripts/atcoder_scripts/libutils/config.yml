@@ -1,0 +1,39 @@
+ModuleName: 
+  modulePath: ./realtivepath/to/program.cpp
+  exports:
+    Snippet1: 
+      snippetName: lib/snippetName 
+      functions: 
+        - function1 
+        - function2 
+      classes: 
+        - class1 
+        - class2 
+    Snippet2: 
+      snippetName: lib/snippetName 
+      functions: 
+        - function1 
+        - function2 
+      classes: 
+        - class1 
+        - class2 
+
+ModuleName2: 
+  modulePath: ./realtivepath/to/program.cpp
+  exports:
+    Snippet1: 
+      snippetName: lib/snippetName 
+      functions: 
+        - function1 
+        - function2 
+      classes: 
+        - class1 
+        - class2 
+    Snippet2: 
+      snippetName: lib/snippetName 
+      functions: 
+        - function1 
+        - function2 
+      classes: 
+        - class1 
+        - class2 

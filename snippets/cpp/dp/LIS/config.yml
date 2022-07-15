@@ -1,0 +1,16 @@
+LIS:
+  modulePath: ./LIS.cpp
+  exports:
+    LISWithConstruction:
+      snippetName: lib/LISWithConstruction
+      classes:
+      functions:
+        - LISConstruction
+
+    LIS:
+      snippetName: lib/LIS
+      classes:
+      functions:
+        - LIS
+  
+  

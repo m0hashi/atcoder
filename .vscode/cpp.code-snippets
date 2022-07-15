@@ -1,0 +1,253 @@
+{
+	// Place your atc-env workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"for loop 0":{
+		"scope": "cpp",
+		"prefix": "for0",
+		"body": "for (int ${1:i} = 0; $1 < ${2:n}; $1++)"
+	},
+	"for loop 1":{
+		"scope": "cpp",
+		"prefix": "for1",
+		"body": "for (int ${1:i} = 0; $1 <= ${2:n}; $1++)"
+	},
+	"for loop 2":{
+		"scope": "cpp",
+		"prefix": "for2",
+		"body": "for (int ${1:i} = ${2:0}; $1 <= ${3:n}; $1++)"
+	},
+	// "forr loop 0":{
+	// 	"scope": "cpp",
+	// 	"prefix": "repr",
+	// 	"body": "for (int ${1:i} = ${2:n} - 1; $1 >= 0; $1++)"
+	// },
+	// "forr loop 1":{
+	// 	"scope": "cpp",
+	// 	"prefix": "repr1",
+	// 	"body": "for (int ${1:i} = ${2:n}; $1 > 0; $1++)"
+	// },
+	"cout flush":{
+		"scope": "cpp",
+		"prefix": "coutf",
+		"body": "cout << ${1:var} << endl;",
+		
+	},
+	"cout precision":{
+		"scope": "cpp",
+		"prefix": "coutp",
+		"body": "cout << setprecision(${1:20}) << ${2:var} << endl;"
+	},
+	"cin variable":{
+		"scope": "cpp",
+		"prefix": "cinn",
+		"body":[
+			"int ${2};",
+			"cin${2/([^,]+)([,\\s]*|)/ >> $1/g};",
+		]
+	},
+	"for each":{
+		"scope": "cpp",
+		"prefix": "fora",
+		"body": [
+			"for(auto&& $1:$2)"
+		]
+	},
+	"all elements":{
+		"scope": "cpp",
+		"prefix": "alln",
+		"body": [
+			"$1.begin(), $1.end()"
+		]
+	},
+	"vector t": {
+		"scope": "cpp",
+		"prefix": "vn",
+		"body":[
+			"vector<$1>"
+		]
+	},
+	"vector vector t": {
+		"scope": "cpp",
+		"prefix": "vvn",
+		"body":[
+			"vector<vector<$1>>"
+		]
+	},
+	"power long long":{
+		"scope": "cpp",
+		"prefix": "powll",
+		"body":[
+			"ll powll(ll x, ll p){",
+			"    ll res=1;",
+			"    while(p>0){",
+			"        if (p & 1) res = res* x;",
+			"        x = x*x;",
+			"        p >>=1;",
+		    "    }",
+		    "    return res;",
+			"}",
+		]
+	},
+	"mod pow":{
+		"scope": "cpp",
+		"prefix": "mod_pow",
+		"body":[
+			"mint mod_pow(mint x, ll p) {",
+			"    mint res = 1;",
+			"    while(p > 0) {",
+			"        if(p & 1)",
+			"            res *= x;",
+			"        x *= x;",
+			"        p >>= 1;",
+			"    }",
+			"    return res;",
+			"}",
+		]
+	},
+	"mod Combination":{
+		"scope": "cpp",
+		"prefix": "nCk",
+		"body":[
+			"vector<mint> fac, finv, inv;",
+			"void init(ll n=200000){",
+			"    fac.resize(n+1);finv.resize(n+1);inv.resize(n+1);",
+			"    fac[0] = fac[1] = 1;",
+			"    finv[0] = finv[1] = 1;",
+			"    inv[1] = 1;",
+			"    for (int i = 2; i <= n; i++){",
+			"        fac[i] = fac[i - 1] * i;",
+			"        inv[i] = MOD - inv[MOD%i] * (MOD / i) ;",
+			"        finv[i] = finv[i - 1] * inv[i] ;",
+			"    }",
+			"}",
+			"",
+			"mint nCk(ll n, ll k){",
+			"    if (n < k) return 0;",
+			"    if (n < 0 || k < 0) return 0;",
+			"    return  fac[n] * (finv[k] * finv[n - k]) ;",
+			"}",
+		]
+	},
+	"run length encode":{
+		"scope": "cpp",
+		"prefix": "rlenc",
+		"body":[
+			"vector<pair<char, ll>> runlength_encode(const string &str) {",
+			"    ll n = (ll)str.size();",
+			"    vector<pair<char, ll>> ret;",
+			"    for(ll l = 0; l < n;) {",
+			"        ll r = l + 1;",
+			"        for(; r < n && str[l] == str[r]; r++);",
+			"        ret.push_back({str[l], r - l});",
+			"        l = r;",
+			"    }",
+			"    return ret;",
+			"}",
+		]
+	},
+	"run length decode":{
+		"scope": "cpp",
+		"prefix": "rldec",
+		"body":[
+			"string runlength_decode(const vector<pair<char, ll>> &code) {",
+			"    string ret = \"\";",
+			"    for(auto p : code) {",
+			"        for(ll i = 0; i < p.second; i++) {",
+			"            ret.push_back(p.first);",
+			"        }",
+			"    }",
+			"    return ret;",
+			"}",
+		]
+	},
+	"gcd":{
+		"scope": "cpp",
+		"prefix": "gcdll",
+		"body": [
+			"ll gcd(ll a, ll b) {",
+			"    if(b == 0) return a;",
+			"    return gcd(b, a % b);",
+			"}",
+		]
+	},
+	"lcm":{
+		"scope": "cpp",
+		"prefix": "lcmll",
+		"body":[
+			"ll lcm(ll a, ll b) { ",
+			"    return a / gcd(a, b) * b; ",
+			"}",
+		]
+	},
+	"cout YesNo":{
+		"scope": "cpp",
+		"prefix": "yesno",
+		"body": [
+			"cout << (ans?\"Yes\":\"No\") << endl;"
+		]
+	},
+	"split string":{
+		"scope": "cpp",
+		"prefix": "split",
+		"body":[
+			"vector<string> split(string& str, string delim ) {",
+			"    vector<string> tokens;",
+			"    int spos=0, epos;",
+			"    while((epos=str.find_first_of(delim, spos)) != string::npos){",
+			"        tokens.push_back(str.substr(spos, epos-spos));",
+			"        spos=epos+delim.length();",
+			"    }",
+			"    if (tokens.size()==0) tokens.push_back(str);",
+			"    return tokens;",
+			"}",
+		]
+	},
+	"argsort":{
+		"scope": "cpp",
+		"prefix": "argsort",
+		"body": [
+			"template <typename T>",
+			"vector<size_t> argsort(vector<T> &array) {",
+			"    vector<size_t> indices(array.size());",
+			"    iota(indices.begin(), indices.end(), 0);",
+			"    sort(indices.begin(), indices.end(), [&](size_t a, size_t b) { return array[a] < array[b]; });",
+			"    return indices;",
+			"}",
+		]
+	},
+	"subsetof":{
+		"scope": "cpp",
+		"prefix": "subsetof",
+		"body":[
+			"template <typename U>",
+			"bool subsetof(U T, U S){",
+			"    return includes(S.begin(), S.end(), T.begin(), T.end());",
+			"}",
+		]
+	},
+	"graph":{
+		"scope": "cpp",
+		"prefix": "graph",
+		"body":[
+		"struct Edge{",
+		"    int to,w;",
+		"    Edge(int to, int w=1): to(to), w(w){}",
+		"};",
+		"using Graph=vector<vector<Edge>>;",
+		]
+	}
+}

@@ -1,0 +1,7 @@
+UnionFind: 
+  modulePath: ./UnionFind.cpp
+  exports:
+    UnionFind: 
+      snippetName: lib/UnionFind 
+      classes: 
+        - UnionFind

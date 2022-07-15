@@ -1,0 +1,64 @@
+#!/usr/local/bin/python
+import subprocess 
+import argparse 
+from pathlib import Path
+import glob
+
+def run_test(target, tle=None, error=None):
+    
+    suffix = target.split(".")[1]
+    if suffix == "cpp":
+        # subprocess.call(['g++', '--std=c++17', '-O2', target,'-o', './a.out'])
+        subprocess.call(["g++",
+                "-std=c++17",
+                "-O2",
+                # "-g3",
+                # "-Wall",
+                # "-Wextra",
+                # "-Wshadow",
+                # "-ftrapv",
+                # "-fstack-protector-all",
+                # "-fsanitize=address,undefined",
+                target,
+                '-o',
+                './a.out'
+        ])
+        # cmd = ['oj', 'test', '-c', './a.out', '-d', './test', '--print-memory', '--ignore-spaces-and-newlines']
+        cmd = ['oj', 'test', '-c', './a.out', '-d', './test', '--print-memory', '--ignore-spaces-and-newlines']
+        if tle is not None: 
+            cmd += ['--tle', tle]
+        if error is not None: 
+            cmd += ['-e', error]
+        print(cmd)
+        subprocess.call(cmd)
+    elif suffix == 'py':
+        subprocess.call(['oj', 'test', f'-c python {target}', '-d', './test', '--print-memory', '--ignore-spaces-and-newlines'])
+
+def prepare_case():
+    input_files = glob.glob('./in/*')
+    output_files = glob.glob('./out/*')
+    files = input_files + output_files
+    for i in files:
+        o = './test/' + Path(i).name
+        if Path(o).exists():
+            continue
+        with open(i, 'rb') as _f:
+            case = _f.read()
+        with open(o, 'wb') as _f:
+            _f.write(case)
+        
+if __name__=='__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--target', default='main.cpp')
+    parser.add_argument('--tle',)
+    parser.add_argument('-e', '--error',)
+    parser.add_argument('-lc','--library_checker', action='store_true' )
+    args = parser.parse_args()
+    target = args.target
+    tle = args.tle
+    error = args.error
+    if args.library_checker:
+        Path("test").mkdir(exist_ok=True)
+        prepare_case()
+
+    run_test(target, tle, error)

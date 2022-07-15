@@ -1,0 +1,32 @@
+#!/usr/local/bin/python
+import subprocess
+import argparse
+from sys import flags
+import toml
+import pathlib
+
+
+def get_config(config_path='./ojconfig.toml'):
+    config_path=pathlib.Path(config_path)
+    if config_path.exists():
+        return dict(**toml.load(config_path))
+    else:
+        return {}
+
+def submit():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('target', default='main.cpp')
+    parser.add_argument('--url', default=None)
+    parser.add_argument('-y', action='store_true')
+    args = parser.parse_args()
+    url = args.url
+    target = args.target
+    if url is None:
+        url = get_config().get('problem_url').get('url')
+    if args.y:
+        subprocess.call(['oj', 'submit', url, target, '-y'])
+    else:
+        subprocess.call(['oj', 'submit', url, target])
+
+if __name__=='__main__':
+    submit()

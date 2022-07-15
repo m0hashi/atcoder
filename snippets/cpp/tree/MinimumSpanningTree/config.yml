@@ -1,0 +1,17 @@
+Prim: 
+  modulePath: ./PrimMST.cpp
+  exports:
+    Prim: 
+      snippetName: lib/PrimMST
+      functions: 
+
+Prim: 
+  modulePath: ./KruskalMST.cpp
+  exports:
+    Prim: 
+      snippetName: lib/KruskalMST
+      functions: 
+      classes: 
+        - Edge
+        - UnionFind
+        - KruskalMST

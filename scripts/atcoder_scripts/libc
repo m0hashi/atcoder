@@ -1,0 +1,36 @@
+#!/usr/local/bin/python
+import argparse
+from pathlib import Path
+from libutils.updatelib import update_cpp_snippet
+from libutils.prep import prep
+
+def handler_updatelib(args):
+    if(args.lang=='cpp'):
+        update_cpp_snippet()
+        
+def handler_putcfg(args):
+    prep(args.lang, args.dirname)
+    
+        
+def build_parser():
+    parser = argparse.ArgumentParser()
+    subparser = parser.add_subparsers()
+    
+    parser_updatelib = subparser.add_parser('update')
+    parser_updatelib.add_argument("-L", "--lang", default='cpp')
+    parser_updatelib.set_defaults(handler=handler_updatelib)
+
+    parser_updatelib = subparser.add_parser('prep')
+    parser_updatelib.add_argument("-L", "--lang", default='cpp')
+    parser_updatelib.add_argument("dirname")
+    parser_updatelib.set_defaults(handler=handler_putcfg)
+    
+    return parser
+    
+
+
+if __name__=='__main__':
+    parser = build_parser()
+    args = parser.parse_args()
+    if hasattr(args, 'handler'):
+        args.handler(args)

@@ -1,0 +1,7 @@
+FloydWarshall: 
+  modulePath: ./FloydWarshall.cpp
+  exports:
+    floydWarshall: 
+      snippetName: lib/floydWarshall_function 
+      functions: 
+        - floydWarshall

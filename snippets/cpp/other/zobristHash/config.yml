@@ -1,0 +1,12 @@
+ZobristHash: 
+  modulePath: ./zobristHash.cpp
+  exports:
+    ZobristHash: 
+      snippetName: lib/ZobristHash
+      classes: 
+        - ZobristHash
+    ZobristHash_128: 
+      snippetName: lib/ZobristHash_128
+      classes: 
+        - ZobristHash_128
+

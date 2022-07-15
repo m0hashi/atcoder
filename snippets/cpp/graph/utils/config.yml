@@ -1,0 +1,13 @@
+Utils: 
+  modulePath: ./utils.cpp
+  exports:
+    Edge: 
+      snippetName: lib/Edge
+      classes: 
+        - Edge 
+    Graph: 
+      snippetName: lib/Graph
+      # functions: 
+      #   - function1 
+      classes: 
+        - Graph 

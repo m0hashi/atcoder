@@ -1,0 +1,6 @@
+#!/usr/local/bin/python
+import subprocess
+import sys
+from pathlib import Path
+for dir in sys.argv[1:]:
+    subprocess.call(['mv', dir, '/workspaces/atc-env/.bk'])

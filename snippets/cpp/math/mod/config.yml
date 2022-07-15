@@ -1,0 +1,7 @@
+ModCom: 
+  modulePath: ./mod.cpp
+  exports:
+    MdoCom: 
+      snippetName: lib/modCom
+      classes: 
+        - ModCom

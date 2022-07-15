@@ -1,0 +1,10 @@
+lang: cpp
+destination: /workspaces/atc-env/cpplib.code-snippets
+library_location: /workspace/atc-env/library
+snnipet_prefix: _lib_
+
+libraries:
+  - Edge:
+      name: edge
+      file: edge
+  

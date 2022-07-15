@@ -1,0 +1,11 @@
+primeUtils: 
+  modulePath: ./prime.cpp
+  exports:
+    sieveOfErathos: 
+      snippetName: lib/sieveOfErathos 
+      functions: 
+        - sieveOfErathos 
+    primeFactorize:
+      snippetName: lib/primeFactorize
+      functions: 
+        - primeFactorize

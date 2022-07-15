@@ -1,0 +1,29 @@
+{
+"name": "Python 3",
+    "context": "..",
+    "dockerFile": "Dockerfile",
+
+    "settings": { 
+        // "terminal.integrated.profiles.linux": "/bin/bash",
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintPath": "/usr/local/bin/pylint"
+    },
+
+    "appPort": [ 8501 ],
+
+    "remoteUser": "root", //usernsでuid+1000がhostのuidに対応するようにしているので、vscode(1000)でなくroot(0)を使う
+
+    "extensions": [
+		"ms-python.python",
+		"coenraads.bracket-pair-colorizer-2",
+		"sanaajani.taskrunnercode",
+		"vscode-icons-team.vscode-icons",
+		"ms-vscode.cpptools",
+		"austin.code-gnu-global"
+    ],
+
+    "postCreateCommand": "./.devcontainer/postCreateCommand.sh"
+    
+}

@@ -1,0 +1,23 @@
+DijkstraWithConstruction:
+  modulePath: ./DijkstraWithConstruction.cpp
+  exports:
+    DijkstraWithConstruction:
+      snippetName: lib/DijkstraWithConstruction
+      classes:
+        - Edge
+        - Dijkstra
+
+
+Dijkstra:
+  modulePath: ./Dijkstra.cpp
+  exports:
+    Dijkstra:
+      snippetName: lib/Dijkstra
+      classes:
+        - Edge
+        - Dijkstra
+    dijkstra_function:
+      snippetName: lib/dijkstra_function
+      functions: 
+        - dijkstra 
+
